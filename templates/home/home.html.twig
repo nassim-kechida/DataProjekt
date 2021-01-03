@@ -2,4 +2,25 @@
 
 {% block title %}Accueil{% endblock %}
 {% block MonTitre %}Accueil{% endblock %}
-{% block content %}{% endblock %}
+{% block content %}
+
+<div class="row">
+{% for article in articles %}
+
+<div class="card col-md-4" style="width: 18rem;">
+<p class="date"> Ecrit le </p>
+    <img src="{{article.image}}" class="card-img-top" alt="{{article.image}}">
+    <div class="card-body">
+        <h5 class="card-title">{{article.title}}</h5>
+        <a href="#" class="btn btn-primary">En savoir plus</a>
+  </div>
+</div>
+
+    
+{% endfor %}
+
+
+</div>
+
+
+{% endblock %}

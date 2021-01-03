@@ -2,9 +2,10 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Article;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
@@ -13,6 +14,11 @@ class HomeController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('home/home.html.twig');
+        $repo = $this->getDoctrine()->getRepository(Article::class);
+        $articles = $repo->findAll();
+        
+        return $this->render('home/home.html.twig', [
+            'articles' => $articles,
+        ]);
     }
 }

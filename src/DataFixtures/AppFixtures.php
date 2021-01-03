@@ -2,12 +2,14 @@
 
 namespace App\DataFixtures;
 
+use Faker;
+use DateTime;
+use App\Entity\User;
 use App\Entity\Article;
 use App\Entity\Category;
-use Faker;
-use App\Entity\User;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+
 
 class AppFixtures extends Fixture
 {
@@ -17,7 +19,7 @@ class AppFixtures extends Fixture
         // $manager->persist($product);
         $faker = \Faker\Factory::create('fr_FR');
         $user = [];
-        for($i=0; $i < 50; $i++){
+        for($i=0; $i < 10; $i++){
             $user = new User();
             $user->setFirstname($faker->firstname());
             $user->setLastname($faker->lastname());
@@ -31,7 +33,7 @@ class AppFixtures extends Fixture
         }
 
         $category =[];
-        for($i=0; $i < 15; $i++){
+        for($i=0; $i < 3; $i++){
             $category = new Category();
             $category->setTitle($faker->text(50));
             $category->setDescription($faker->text(250));
@@ -40,14 +42,14 @@ class AppFixtures extends Fixture
             $categories[] = $category;
         }
         $articles = [];
-        for($i=0; $i < 100; $i++){
+        for($i=0; $i < 6; $i++){
             $article =new Article();
             $article->setTitle($faker->text(50));
             $article->setContent($faker->text(1000));
             $article->setImage($faker->imageUrl());
-            $article->setCreatedAt(new\DateTime());
-            $article->addCategory($categories[$faker->numberBetween(0,14)]);
-            $article->setAuthor($users[$faker->numberBetween(0,49)]);
+            $article->setCreatedAt(new\DateTimeImmutable());
+            $article->addCategory($categories[$faker->numberBetween(0,2)]);
+            $article->setAuthor($users[$faker->numberBetween(0,9)]);
             $manager->persist($article);
         }
 
