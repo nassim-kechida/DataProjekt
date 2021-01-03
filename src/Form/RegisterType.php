@@ -43,6 +43,7 @@ class RegisterType extends AbstractType
                 'placeholder' => [
                      'Jours' => 'Jours','Mois' => 'Mois', 'Années' => 'Années',
                     ]
+                
             ])
             ->add('email', EmailType::class, [
                 'constraints' => new Length([
